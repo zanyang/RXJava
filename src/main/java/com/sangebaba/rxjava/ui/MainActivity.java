@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity {
         DebugLog.e("test");
 
         // TODO: 2016/12/16 创建观察者 observer
-        final Observer<String> stringObserver = new class Course {
+        final Observer<String> stringObserver = new         class Course {
 
             String name = "";
 
@@ -67,8 +67,7 @@ public class MainActivity extends BaseActivity {
             public String getCourse() {
                 return " china  " + name;
             }
-        }
-        ;
+        };
         // TODO: 2016/12/16 创建被观察者 observerable
         Observable observable = Observable.create(new
         class Student {
@@ -128,11 +127,11 @@ public class MainActivity extends BaseActivity {
         })
                 .subscribeOn(Schedulers.io())  //指定事件产生的线程
                 .doOnSubscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        DebugLog.i(s + "=====");
-                    }
-                })
+            @Override
+            public void call(String s) {
+                DebugLog.i(s + "=====");
+            }
+        })
                 .observeOn(AndroidSchedulers.mainThread())  //指定事件消费的线程
                 .subscribe(new Observable.OnSubscribe<Drawable>() {
             @Override
@@ -141,34 +140,34 @@ public class MainActivity extends BaseActivity {
                 subscriber.onNext(drawable);
                 subscriber.onCompleted();
             }
-                });
+        });
 
 
-        Action0() {
-            @Override
-            public void call () {
-                DebugLog.i("指定线程");
-            }
-        }
+Action0() {
+                    @Override
+                    public void call() {
+                        DebugLog.i("指定线程");
+                    }
+                }
 
-        Observer<Drawable> () {
-            @Override
-            public void onCompleted () {
+Observer<Drawable>() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError (Throwable e){
-                DebugLog.i("Error=====");
+                    @Override
+                    public void onError(Throwable e) {
+                        DebugLog.i("Error=====");
 
-            }
+                    }
 
-            @Override
-            public void onNext (Drawable drawable){
-                ivPic.setImageDrawable(drawable);
+                    @Override
+                    public void onNext(Drawable drawable) {
+                        ivPic.setImageDrawable(drawable);
 
-            }
-        }
+                    }
+                }
 
         Student[] students = new Student[]{new Student("zhangsan"), new Student("lisi"), new Student("wangwu"), new Student("maliu")};
 
