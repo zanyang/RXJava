@@ -135,12 +135,12 @@ public class MainActivity extends BaseActivity {
                 })
                 .observeOn(AndroidSchedulers.mainThread())  //指定事件消费的线程
                 .subscribe(new Observable.OnSubscribe<Drawable>() {
-                    @Override
-                    public void call(Subscriber<? super Drawable> subscriber) {
-                        Drawable drawable = getResources().getDrawable(programmer);
-                        subscriber.onNext(drawable);
-                        subscriber.onCompleted();
-                    }
+            @Override
+            public void call(Subscriber<? super Drawable> subscriber) {
+                Drawable drawable = getResources().getDrawable(programmer);
+                subscriber.onNext(drawable);
+                subscriber.onCompleted();
+            }
                 });
 
 

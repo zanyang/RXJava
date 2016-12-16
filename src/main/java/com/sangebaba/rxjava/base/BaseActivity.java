@@ -9,8 +9,9 @@ import butterknife.ButterKnife;
 
 
 /**
+ *
  * @author zanyang
- *         created at 2016/12/16 10:45
+ * created at 2016/12/16 10:45
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
