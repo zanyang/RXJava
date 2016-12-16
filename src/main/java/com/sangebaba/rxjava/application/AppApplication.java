@@ -7,14 +7,15 @@ public class AppApplication extends Application {
 
     private static AppApplication sInstance;
 
-    public static AppApplication getsInstance() {
-        return sInstance;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
         this.sInstance = this;
+    }
+
+
+    public static AppApplication getsInstance() {
+        return sInstance;
     }
 
 }

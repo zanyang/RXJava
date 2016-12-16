@@ -56,45 +56,7 @@ public class MainActivity extends BaseActivity {
         DebugLog.e("test");
 
         // TODO: 2016/12/16 创建观察者 observer
-        final Observer<String> stringObserver = new         class Course {
-
-            String name = "";
-
-            public Course(String name) {
-                this.name = name;
-            }
-
-            public String getCourse() {
-                return " china  " + name;
-            }
-        };
-        // TODO: 2016/12/16 创建被观察者 observerable
-        Observable observable = Observable.create(new
-        class Student {
-            String name = "";
-
-            Course course[];
-
-            public Student(String name) {
-                this.name = name;
-                course = new Course[]{new Course(getName()), new Course(getName()), new Course(getName()), new Course(getName())};
-            }
-
-
-            public String getName() {
-                return name;
-            }
-        });
-        //// TODO: 2016/12/16 等价于just()   from()
-        Observable.just("111", "222", "333");
-        Observable.from(new String[]{"111", "222", "333"});
-
-        // TODO: 2016/12/16  创建subscribe() 方法关联 observer obserable
-        observable.subscribe(stringObserver);
-
-
-        // TODO: 2016/12/16 示例一 打印字符串数组
-        Observable.from(new String[]{"1", "2", "3"}).subscribe(new Observer<String>() {
+        final Observer<String> stringObserver = new Observer<String>() {
             @Override
             public void onCompleted() {
                 DebugLog.i("onCompleted======");
@@ -111,10 +73,9 @@ public class MainActivity extends BaseActivity {
                 DebugLog.i(s + "==========");
             }
 
-        });
-        // TODO: 2016/12/16  示例二 取得id图片并显示
-        final int programmer = R.drawable.programmer;
-        Observable.create(new Observable.OnSubscribe<String>() {
+        };
+        // TODO: 2016/12/16 创建被观察者 observerable
+        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
 
             @Override
             public void call(Subscriber<? super String> subscriber) {
@@ -124,33 +85,41 @@ public class MainActivity extends BaseActivity {
                 subscriber.onNext("444");
                 subscriber.onCompleted();
             }
-        })
-                .subscribeOn(Schedulers.io())  //指定事件产生的线程
-                .doOnSubscribe(new Action1<String>() {
+        });
+        //// TODO: 2016/12/16 等价于just()   from()
+        Observable.just("111", "222", "333");
+        Observable.from(new String[]{"111", "222", "333"});
+
+        // TODO: 2016/12/16  创建subscribe() 方法关联 observer obserable
+        observable.subscribe(stringObserver);
+
+
+        // TODO: 2016/12/16 示例一 打印字符串数组
+        Observable.from(new String[]{"1", "2", "3"}).subscribe(new Action1<String>() {
             @Override
             public void call(String s) {
                 DebugLog.i(s + "=====");
             }
-        })
-                .observeOn(AndroidSchedulers.mainThread())  //指定事件消费的线程
-                .subscribe(new Observable.OnSubscribe<Drawable>() {
+        });
+        // TODO: 2016/12/16  示例二 取得id图片并显示
+        final int programmer = R.drawable.programmer;
+        Observable.create(new Observable.OnSubscribe<Drawable>() {
             @Override
             public void call(Subscriber<? super Drawable> subscriber) {
                 Drawable drawable = getResources().getDrawable(programmer);
                 subscriber.onNext(drawable);
                 subscriber.onCompleted();
             }
-        });
-
-
-Action0() {
+        })
+                .subscribeOn(Schedulers.io())  //指定事件产生的线程
+                .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
                         DebugLog.i("指定线程");
                     }
-                }
-
-Observer<Drawable>() {
+                })
+                .observeOn(AndroidSchedulers.mainThread())  //指定事件消费的线程
+                .subscribe(new Observer<Drawable>() {
                     @Override
                     public void onCompleted() {
 
@@ -167,7 +136,37 @@ Observer<Drawable>() {
                         ivPic.setImageDrawable(drawable);
 
                     }
-                }
+                });
+
+
+        class Course {
+
+            String name = "";
+
+            public Course(String name) {
+                this.name = name;
+            }
+
+            public String getCourse() {
+                return " china  " + name;
+            }
+        }
+
+        class Student {
+            String name = "";
+
+            Course course[];
+
+            public Student(String name) {
+                this.name = name;
+                course = new Course[]{new Course(getName()), new Course(getName()), new Course(getName()), new Course(getName())};
+            }
+
+
+            public String getName() {
+                return name;
+            }
+        }
 
         Student[] students = new Student[]{new Student("zhangsan"), new Student("lisi"), new Student("wangwu"), new Student("maliu")};
 
